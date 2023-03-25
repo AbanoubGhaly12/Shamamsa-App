@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "756947990909",
+    "project_id": "shammsa-app",
+    "storage_bucket": "shammsa-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:756947990909:android:b0441987e56633d6b27414",
+        "android_client_info": {
+          "package_name": "com.example.shamamsa_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "756947990909-9569bm7qelnmirl2ea6osljfvl4nk6vr.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBnkF8OXmSNftZsVYqfirujognYno-FsV8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "756947990909-9569bm7qelnmirl2ea6osljfvl4nk6vr.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
