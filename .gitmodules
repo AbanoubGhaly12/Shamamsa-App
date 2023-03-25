@@ -1,0 +1,3 @@
+[submodule "Base-Arch"]
+	path = Base-Arch
+	url = https://github.com/AbanoubGhaly12/Base-Arch.git
