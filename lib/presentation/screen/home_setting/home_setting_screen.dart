@@ -93,6 +93,27 @@ class _HomeSettingScreenState extends BaseState<HomeSettingScreen, HomeSettingVi
               borderOnForeground: true,
               color: ColorsManager.darkCharcoal,
               child: ListTile(
+                onTap: () {
+                  viewModel.navigation.pushNamed(route: Routes.examRoute, arguments: widget.collectionReferenceId);
+                },
+                leading: Icon(
+                  Icons.add_chart,
+                  color: ColorsManager.white,
+                ),
+                title: FittedBox(
+                  fit: BoxFit.scaleDown,
+                  child: CustomText(
+                    text: ' امتحان  ${widget.collectionReferenceId}',
+                    style: StyleManager.cairoMediumBold.getStyle(context: context).copyWith(color: ColorsManager.white),
+                  ),
+                ),
+              ),
+            ),
+            Card(
+              elevation: SizeManager.s6,
+              borderOnForeground: true,
+              color: ColorsManager.darkCharcoal,
+              child: ListTile(
                 onTap: () async {
                   final result = await FilePicker.platform.pickFiles(allowMultiple: false);
                   if (result == null) return;

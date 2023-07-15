@@ -31,6 +31,8 @@
   "request_from": "Request From",
   "request_to": "Request For",
   "request_clyncs": "Request Clyncs",
+  "score":"درجة اللحن",
+  "question":"سؤال الطقس",
   "continue": "Continue",
   "category_error": "Please Select a category",
   "lastname_hint": "Last name",

@@ -52,6 +52,11 @@ dependencies:
   cloud_firestore:
   qr_code_scanner:
   file_picker:
+  csv:
+  path_provider:
+  open_file:
+  grouped_list: ^5.1.2
+  auto_size_text: ^3.0.0
   core:
     path: ./Base-Arch
 dev_dependencies:

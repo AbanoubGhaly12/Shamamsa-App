@@ -26,6 +26,8 @@
   "birthdate_hint": "تاريخ الميلاد",
   "lastname_hint": "الأسم الاخير",
   "gender_hint": "النوع",
+  "score":"درجة اللحن",
+  "question":"سؤال الطقس",
   "gender_error": "اختر النوع",
   "category_error": "اختر النوع",
   "password_hint": "كلمه السر",

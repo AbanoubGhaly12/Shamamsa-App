@@ -24,7 +24,6 @@ class _LoginScreenState extends BaseState<LoginScreen, LoginViewModel> {
   late final TextEditingController emailController;
   late final TextEditingController passwordController;
 
-
   @override
   Widget buildWidget(BuildContext context) {
     return Directionality(
@@ -33,6 +32,7 @@ class _LoginScreenState extends BaseState<LoginScreen, LoginViewModel> {
         resizeToAvoidBottomInset: false,
         backgroundColor: ColorsManager.darkCharcoal,
         body: SafeArea(
+
           child: Center(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,

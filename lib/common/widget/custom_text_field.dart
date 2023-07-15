@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:shamamsa_app/common/resources/color_manager.dart';
+import 'package:shamamsa_app/common/resources/style_manager.dart';
 
 import '../resources/size_manager.dart';
 
@@ -64,7 +66,6 @@ class CustomTextField extends StatelessWidget {
     return Padding(
       padding: errorText == null ? EdgeInsets.zero : const EdgeInsets.only(bottom: SizeManager.s8),
       child: TextFormField(
-
         onFieldSubmitted: onSubmitted,
         enableSuggestions: enableSuggestions,
         showCursor: showCursor,
@@ -97,6 +98,7 @@ class CustomTextField extends StatelessWidget {
         style: textStyle,
         decoration: inputDecoration ??
             InputDecoration(
+                errorStyle:StyleManager.cairoSmallRegular.getStyle(context: context).copyWith(color: ColorsManager.white),
                 fillColor: Colors.white,
                 hintText: hintText,
                 errorText: errorText,

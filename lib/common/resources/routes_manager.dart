@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:shamamsa_app/presentation/model/ExamFormModel.dart';
+import 'package:shamamsa_app/presentation/screen/exam/exam_screen.dart';
 import 'package:shamamsa_app/presentation/screen/home_setting/home_setting_screen.dart';
 import 'package:shamamsa_app/presentation/screen/section/scan_screen.dart';
 import '../../core/service_locator/service_locator.dart';
@@ -14,8 +16,7 @@ class Routes {
   static const String loginRoute = "/auth/login";
   static const String registerRoute = "/auth/register";
   static const String forgetPasswordRoute = "/auth/forget_password";
-  static const String resetPasswordRoute =
-      "/auth/forget_password/reset_password";
+  static const String resetPasswordRoute = "/auth/forget_password/reset_password";
   static const String demoRoute = "/auth/demoRoute/demoRoute";
 
   static const String departmentRoute = "/auth/departmentRoute/departmentRoute";
@@ -23,6 +24,8 @@ class Routes {
   static const String sectionRoute = "/auth/sectionRoute/sectionRoute";
   static const String homeSettingRoute = "/auth/homeSettingRoute/homeSettingRoute";
   static const String detailsRoute = "/auth/detailsRoute/detailsRoute";
+  static const String examRoute = "/auth/detailsRoute/examRoute";
+  static const String examFormRoute = "/auth/detailsRoute/examFormRoute";
 }
 
 class RouteGenerator {
@@ -36,20 +39,41 @@ class RouteGenerator {
         initDepartmentViewModel();
         return MaterialPageRoute(builder: (_) => const DepartmentScreen());
 
-        case Routes.homeSettingRoute:
+      case Routes.homeSettingRoute:
         initHomeSettingViewModel();
         String argument = routeSettings.arguments as String;
-        return MaterialPageRoute(builder: (_) =>  HomeSettingScreen(collectionReferenceId: argument,));
+        return MaterialPageRoute(
+            builder: (_) => HomeSettingScreen(
+                  collectionReferenceId: argument,
+                ));
 
-        case Routes.detailsRoute:
+      case Routes.detailsRoute:
         initDetailsViewModel();
         String argument = routeSettings.arguments as String;
-        return MaterialPageRoute(builder: (_) =>  DetailsScreen(collectionReferenceId: argument,));
+        return MaterialPageRoute(
+            builder: (_) => DetailsScreen(
+                  collectionReferenceId: argument,
+                  isAttendanceScreen: true,
+                ));
+      case Routes.examRoute:
+        initDetailsViewModel();
+        String argument = routeSettings.arguments as String;
+        return MaterialPageRoute(
+            builder: (_) => DetailsScreen(
+                  collectionReferenceId: argument,
+                  isAttendanceScreen: false,
+                ));
+      case Routes.examFormRoute:
+        initExamViewModel();
+        ExamFormModel argument = routeSettings.arguments as ExamFormModel;
+        return MaterialPageRoute(
+            builder: (_) => ExamScreen(
+                  examFormModel: argument,
+                ));
       case Routes.scanRoute:
         initSectionViewModel();
         String argument = routeSettings.arguments as String;
-        return MaterialPageRoute(
-            builder: (_) => ScanScreen(collectionReferenceId: argument));
+        return MaterialPageRoute(builder: (_) => ScanScreen(collectionReferenceId: argument));
       case Routes.sectionRoute:
         initSectionViewModel();
         List<String?> list = routeSettings.arguments as List<String?>;
@@ -57,8 +81,8 @@ class RouteGenerator {
         String? collectionId = list[0];
         return MaterialPageRoute(
             builder: (_) => SectionsScreen(
-                  collectionReferenceId: collectionId??"",
-                  username: username??"",
+                  collectionReferenceId: collectionId ?? "",
+                  username: username ?? "",
                 ));
     }
     return null;

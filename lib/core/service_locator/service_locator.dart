@@ -6,9 +6,11 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:shamamsa_app/data/repository/firestore_repo.dart';
 import 'package:shamamsa_app/domain/repository/i_firestore_repo.dart';
 import 'package:shamamsa_app/domain/usecase/department_usecase.dart';
+import 'package:shamamsa_app/domain/usecase/exam_usecase.dart';
 import 'package:shamamsa_app/domain/usecase/home_setting_usecase.dart';
 import 'package:shamamsa_app/domain/usecase/section_usecase.dart';
 import 'package:shamamsa_app/presentation/screen/department/department_viewmodel.dart';
+import 'package:shamamsa_app/presentation/screen/exam/exam_viewmodel.dart';
 import 'package:shamamsa_app/presentation/screen/home_setting/home_setting_viewmodel.dart';
 import 'package:shamamsa_app/presentation/screen/section/section_viewmodel.dart';
 
@@ -23,8 +25,7 @@ import 'package:get_it/get_it.dart';
 
 initAppModule() async {
   getInstance.registerLazySingleton<AppSettings>(() => Setting());
-  getInstance
-      .registerLazySingleton<IStorageProvider>(() => LocalStorageProvider());
+  getInstance.registerLazySingleton<IStorageProvider>(() => LocalStorageProvider());
 
   initAppModuleBase();
 }
@@ -36,12 +37,10 @@ initRepos() {
 
 initLoginViewModel() {
   if (!GetIt.I.isRegistered<LoginUseCase>()) {
-    getInstance
-        .registerFactory<LoginUseCase>(() => LoginUseCase(getInstance()));
+    getInstance.registerFactory<LoginUseCase>(() => LoginUseCase(getInstance()));
   }
   if (!GetIt.I.isRegistered<LoginViewModel>()) {
-    getInstance
-        .registerFactory<LoginViewModel>(() => LoginViewModel(getInstance()));
+    getInstance.registerFactory<LoginViewModel>(() => LoginViewModel(getInstance()));
   }
 }
 
@@ -50,40 +49,48 @@ initDepartmentViewModel() {
   //   getInstance.registerFactory<DepartmentUseCase>(() => DepartmentUseCase(getInstance()));
   // }
   if (!GetIt.I.isRegistered<DepartmentViewModel>()) {
-    getInstance
-        .registerFactory<DepartmentViewModel>(() => DepartmentViewModel());
+    getInstance.registerFactory<DepartmentViewModel>(() => DepartmentViewModel());
   }
 }
 
 initDetailsViewModel() {
   if (!GetIt.I.isRegistered<DetailsUseCase>()) {
-    getInstance
-        .registerFactory<DetailsUseCase>(() => DetailsUseCase(getInstance()));
+    getInstance.registerFactory<DetailsUseCase>(() => DetailsUseCase(getInstance()));
+  }
+  if (!GetIt.I.isRegistered<SectionUseCase>()) {
+    getInstance.registerFactory<SectionUseCase>(() => SectionUseCase(getInstance()));
+  }
+  if (!GetIt.I.isRegistered<ExamUseCase>()) {
+    getInstance.registerFactory<ExamUseCase>(() => ExamUseCase(getInstance()));
   }
   if (!GetIt.I.isRegistered<DetailsViewModel>()) {
-    getInstance.registerFactory<DetailsViewModel>(
-        () => DetailsViewModel(getInstance()));
+    getInstance.registerFactory<DetailsViewModel>(() => DetailsViewModel(getInstance(), getInstance(), getInstance()));
+  }
+}
+
+initExamViewModel() {
+  if (!GetIt.I.isRegistered<ExamUseCase>()) {
+    getInstance.registerFactory<ExamUseCase>(() => ExamUseCase(getInstance()));
+  }
+  if (!GetIt.I.isRegistered<ExamViewModel>()) {
+    getInstance.registerFactory<ExamViewModel>(() => ExamViewModel(getInstance()));
   }
 }
 
 initHomeSettingViewModel() {
   if (!GetIt.I.isRegistered<HomeSettingUseCase>()) {
-    getInstance
-        .registerFactory<HomeSettingUseCase>(() => HomeSettingUseCase(getInstance()));
+    getInstance.registerFactory<HomeSettingUseCase>(() => HomeSettingUseCase(getInstance()));
   }
   if (!GetIt.I.isRegistered<HomeSettingViewModel>()) {
-    getInstance
-        .registerFactory<HomeSettingViewModel>(() => HomeSettingViewModel(getInstance()));
+    getInstance.registerFactory<HomeSettingViewModel>(() => HomeSettingViewModel(getInstance()));
   }
 }
 
 initSectionViewModel() {
   if (!GetIt.I.isRegistered<SectionUseCase>()) {
-    getInstance
-        .registerFactory<SectionUseCase>(() => SectionUseCase(getInstance()));
+    getInstance.registerFactory<SectionUseCase>(() => SectionUseCase(getInstance()));
   }
   if (!GetIt.I.isRegistered<SectionViewModel>()) {
-    getInstance.registerFactory<SectionViewModel>(
-        () => SectionViewModel(getInstance()));
+    getInstance.registerFactory<SectionViewModel>(() => SectionViewModel(getInstance()));
   }
 }

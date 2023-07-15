@@ -255,6 +255,9 @@ class TextManager {
   static const String esklabios = "esklabios";
   static const String ebram = "ebram";
   static const String estifanos = "estifanos";
+  static const String score = "score";
+  static const String question = "question";
+
 
 
 }

@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 
 class CustomText extends StatelessWidget {
@@ -24,7 +25,7 @@ class CustomText extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: onClicked,
-      child: Text(
+      child: AutoSizeText(
         text,
         overflow: overflow,
         softWrap: true,

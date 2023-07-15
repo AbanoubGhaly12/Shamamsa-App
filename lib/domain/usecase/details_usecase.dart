@@ -19,7 +19,7 @@ class DetailsUseCase extends BaseUseCase<String, List<QueryDocumentSnapshot>> {
       {required String collectionId,
         required String documentId,
         required DocumentType documentType}) async {
-    return await _firestoreRepo.getCollections(
+    return await _firestoreRepo.getCollectionsWithType(
         collectionId: collectionId,
         documentId: documentId,
         typeId: documentType.value);

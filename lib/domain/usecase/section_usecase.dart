@@ -24,4 +24,14 @@ class SectionUseCase extends BaseUseCase<void, List<QueryDocumentSnapshot>> {
         documentId: documentId,
         documentType: documentType);
   }
+
+  Future removeCollection(
+      {required String collectionId,
+      required String documentId,
+      required DocumentType documentType}) async {
+    await _firestoreRepo.createCollection(
+        collectionId: collectionId,
+        documentId: documentId,
+        documentType: documentType);
+  }
 }
