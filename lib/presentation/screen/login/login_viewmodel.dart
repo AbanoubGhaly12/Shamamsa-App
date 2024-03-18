@@ -73,7 +73,11 @@ class LoginViewModel extends BaseViewModel with LoginViewModelInputs, LoginViewM
   @override
   Future login() async {
     await runSafe(() async {
-      await _login();
+      if (loginEntity.isValid) {
+        await _login();
+      } else {
+        view?.showErrorMsg("Invalid email or password");
+      }
     });
   }
 

@@ -5,7 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_phoenix/flutter_phoenix.dart';
 import 'core/app/app.dart';
 import 'core/service_locator/service_locator.dart';
-import 'data/service/google_sheet_service.dart';
 
 Future<void> main() async {
   // SystemChrome.setSystemUIOverlayStyle( SystemUiOverlayStyle(
@@ -15,7 +14,6 @@ Future<void> main() async {
   // ));
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
-  // await GoogleSheetService.init();
   await EasyLocalization.ensureInitialized();
   await initAppModule();
   await initRepos();

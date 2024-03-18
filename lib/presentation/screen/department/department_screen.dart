@@ -20,8 +20,7 @@ class DepartmentScreen extends StatefulWidget {
   State<DepartmentScreen> createState() => _DepartmentScreenState();
 }
 
-class _DepartmentScreenState
-    extends BaseState<DepartmentScreen, DepartmentViewModel> {
+class _DepartmentScreenState extends BaseState<DepartmentScreen, DepartmentViewModel> {
   @override
   Widget buildWidget(BuildContext context) {
     return Scaffold(
@@ -30,10 +29,9 @@ class _DepartmentScreenState
         centerTitle: true,
         title: CustomText(
           text: TextManager.title.tr(),
-          style:
-              StyleManager.cairoMediumBold.getStyle(context: context).copyWith(
-                    color: ColorsManager.white,
-                  ),
+          style: StyleManager.cairoMediumBold.getStyle(context: context).copyWith(
+                color: ColorsManager.white,
+              ),
         ),
       ),
       body: Center(
@@ -45,10 +43,7 @@ class _DepartmentScreenState
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: GridView.builder(
-                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                      mainAxisSpacing: SizeManager.s20,
-                      crossAxisSpacing: SizeManager.s20,
-                      crossAxisCount: 2),
+                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(mainAxisSpacing: SizeManager.s20, crossAxisSpacing: SizeManager.s20, crossAxisCount: 2),
                   itemBuilder: (context, index) {
                     return Column(
                       children: [
@@ -56,42 +51,28 @@ class _DepartmentScreenState
                           child: SizedBox(
                             width: SizeManager.s200,
                             height: SizeManager.s200,
-                            child:
-                                LayoutBuilder(builder: (context, constraints) {
+                            child: LayoutBuilder(builder: (context, constraints) {
                               return Card(
                                 color: Colors.transparent,
                                 elevation: SizeManager.s6,
                                 child: GestureDetector(
                                   onTap: () {
-                                    viewModel.navigation.pushNamed(
-                                        route: Routes.homeSettingRoute,
-                                        arguments: viewModel.collectionReference[index]);
+                                    viewModel.navigation.pushNamed(route: Routes.homeSettingRoute, arguments: viewModel.items[index]);
                                   },
-                                  child: Container(
-                                    width: constraints.maxWidth * 0.8,
-                                    height: constraints.maxHeight * 0.8,
-                                    decoration: BoxDecoration(
-                                        color: ColorsManager.darkCharcoal,
-                                        borderRadius: BorderRadius.circular(
-                                            SizeManager.s20),
-                                        image: DecorationImage(
-                                            image: AssetImage(
-                                          viewModel.items[index]["image"]!,
-                                        ))),
+                                  child: FancyStage1Widget(
+                                    Center(
+                                      child: CustomText(
+                                        text: viewModel.items[index],
+                                        align: TextAlign.center,
+                                        style: StyleManager.cairoSmallRegular.getStyle(context: context).copyWith(fontSize: 22),
+                                      ),
+                                    ),
                                   ),
                                 ),
                               );
                             }),
                           ),
                         ),
-                        FittedBox(
-                          fit: BoxFit.scaleDown,
-                          child: CustomText(
-                            text: viewModel.items[index]["name"]!,
-                            style: StyleManager.cairoSmallRegular
-                                .getStyle(context: context),
-                          ),
-                        )
                       ],
                     );
                   },
@@ -115,4 +96,40 @@ class _DepartmentScreenState
 
   @override
   void onDispose() {}
+}
+
+class FancyStage1Widget extends StatelessWidget {
+  final Widget child;
+
+  FancyStage1Widget(this.child, {super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      decoration: BoxDecoration(
+        gradient: LinearGradient(
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
+          colors: [
+            ColorsManager.darkCharcoal,
+            ColorsManager.darkCharcoal.withOpacity(0.5),
+            ColorsManager.background.withOpacity(0.5),
+            ColorsManager.background.withOpacity(0.5),
+            ColorsManager.background,
+          ],
+        ),
+        borderRadius: BorderRadius.circular(20.0),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.grey.withOpacity(0.5),
+            spreadRadius: 5,
+            blurRadius: 7,
+            offset: Offset(0, 3),
+          ),
+        ],
+      ),
+      padding: EdgeInsets.all(20.0),
+      child: child,
+    );
+  }
 }

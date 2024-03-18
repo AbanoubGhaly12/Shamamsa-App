@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:shamamsa_app/common/enums/document_type.dart';
 import 'package:shamamsa_app/domain/repository/i_firestore_repo.dart';
 
@@ -6,10 +7,9 @@ class FirestoreRepo extends IFirestoreRepo {
   final FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;
 
   @override
-  Future createCollection({required String collectionId, required String documentId, required DocumentType documentType}) async {
-    CollectionReference collectionReference = firebaseFirestore.collection(collectionId).doc(documentId).collection(documentType.getValue());
-
-    await collectionReference.doc(DateTime.now().toString()).set({"time": DateTime.now().toString()});
+  Future createCollection({required String collectionId, required String documentId, required String documentType}) async {
+    CollectionReference collectionReference = firebaseFirestore.collection(collectionId).doc(documentId).collection(documentType);
+    await collectionReference.doc(DateFormat.yMMMEd().format(DateTime.now())).set({"time": DateFormat.yMMMEd().format(DateTime.now())});
   }
 
   @override
@@ -60,10 +60,11 @@ class FirestoreRepo extends IFirestoreRepo {
       await firebaseFirestore.collection(collectionId).doc(name).update({examId: examScore});
     }
   }
+
   @override
-  Future setDocumentMap({required String collectionId, required String name, required Map<String,dynamic> map}) async {
+  Future setDocumentMap({required String collectionId, required String name, required Map<String, dynamic> map}) async {
     DocumentReference documentReference = firebaseFirestore.collection(collectionId).doc(name);
-      await firebaseFirestore.collection(collectionId).doc(name).set(map);
+    await firebaseFirestore.collection(collectionId).doc(name).set(map);
   }
 
   @override

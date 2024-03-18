@@ -31,9 +31,9 @@ class ExamUseCase extends BaseUseCase<void, List<QueryDocumentSnapshot>> {
     await _firestoreRepo.setDocumentMap(collectionId: collectionId, name: name,map: map);
   }
 
-  Future removeCollection({required String collectionId, required String documentId, required DocumentType documentType}) async {
-    await _firestoreRepo.createCollection(collectionId: collectionId, documentId: documentId, documentType: documentType);
-  }
+  // Future removeCollection({required String collectionId, required String documentId, required DocumentType documentType}) async {
+  //   await _firestoreRepo.createCollection(collectionId: collectionId, documentId: documentId, documentType: documentType);
+  // }
 
   Future<List<QueryDocumentSnapshot>> getCollection({required String collectionId}) async {
     return await _firestoreRepo.getDocs(

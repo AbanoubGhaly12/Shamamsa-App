@@ -3,7 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import '../../common/enums/document_type.dart';
 
 abstract class IFirestoreRepo {
-  Future createCollection({required String collectionId, required String documentId, required DocumentType documentType});
+  Future createCollection({required String collectionId, required String documentId, required String documentType});
 
   Future setDocumentField({
     required String collectionId,

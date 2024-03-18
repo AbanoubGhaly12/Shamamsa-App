@@ -1,5 +1,4 @@
 import 'package:easy_localization/easy_localization.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:shamamsa_app/common/resources/color_manager.dart';
 import 'package:shamamsa_app/common/resources/style_manager.dart';
@@ -131,6 +130,9 @@ class _LoginScreenState extends BaseState<LoginScreen, LoginViewModel> {
       ..addListener(() {
         viewModel.inputPassword(passwordController.text);
       });
+
+    // emailController.text ="eng.abanoub.ghaly@gmail.com";
+    // passwordController.text ="123456";
   }
 
   @override

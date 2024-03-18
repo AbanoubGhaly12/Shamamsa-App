@@ -212,5 +212,9 @@
   "pin_code": "Pin Code",
   "male": "Male",
   "female": "Female",
+  "first_stage": "المرحلة الاولي",
+  "second_stage": "المرحلة الثانية",
+  "third_stage": "المرحلة الثالثة",
+  "fourth_stage": "المرحلة الرابعة",
   "title": "نظام حضور اسرة الشمامسة"
 }

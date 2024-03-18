@@ -31,8 +31,8 @@
   "request_from": "Request From",
   "request_to": "Request For",
   "request_clyncs": "Request Clyncs",
-  "score":"درجة اللحن",
-  "question":"سؤال الطقس",
+  "score": "درجة اللحن",
+  "question": "سؤال الطقس",
   "continue": "Continue",
   "category_error": "Please Select a category",
   "lastname_hint": "Last name",
@@ -214,6 +214,9 @@
   "pin_code": "Pin Code",
   "male": "Male",
   "female": "Female",
-  "title": "نظام حضور اسرة الشمامسة"
-
+  "title": "نظام حضور اسرة الشمامسة",
+  "first_stage": "first stage",
+  "second_stage": "second stage",
+  "third_stage": "third stage",
+  "fourth_stage": "fourth stage"
 }

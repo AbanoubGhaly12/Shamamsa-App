@@ -31,10 +31,13 @@ class DetailsViewModel extends BaseViewModel with DetailsViewModelInputs, Detail
   DetailsViewModel(this._detailsUseCase, this._sectionUseCase, this._examUseCase);
 
   List<String> names = [];
-  List<int> odas = [];
-  List<int> tasbeha = [];
-  List<int> egtmaa = [];
-  List<Map<String, dynamic>> map = [];
+
+  List<Future> attendanceFutures = [];
+  // List<int> sundayLitrugy = [];
+  // List<int> fridayLitrugy = [];
+  // List<int> eve = [];
+  // List<int> classAttendance = [];
+  List<Map<String, dynamic>> toCsvMap = [];
   List<Map<String, dynamic>> examScore = [];
   final StreamController<List<QueryDocumentSnapshot>> _dataStreamController = BehaviorSubject<List<QueryDocumentSnapshot>>();
   final StreamController<List<QueryDocumentSnapshot>> _odasStreamController = BehaviorSubject<List<QueryDocumentSnapshot>>();
@@ -65,36 +68,53 @@ class DetailsViewModel extends BaseViewModel with DetailsViewModelInputs, Detail
   Future getAttendance({required String collectionId, required String documentId}) async {
     // TODO: implement getAttendance
     await runSafe(() async {
-      await _detailsUseCase.getCollection(collectionId: collectionId, documentId: documentId, documentType: DocumentType.EGTMAA).then((value) => egtmaaSink.add(value));
-      await _detailsUseCase.getCollection(collectionId: collectionId, documentId: documentId, documentType: DocumentType.TASBEHA).then((value) => tasbehaSink.add(value));
-      await _detailsUseCase.getCollection(collectionId: collectionId, documentId: documentId, documentType: DocumentType.ODAS).then((value) => odasSink.add(value));
+      // await _detailsUseCase.getCollection(collectionId: collectionId, documentId: documentId, documentType: DocumentType.EGTMAA).then((value) => egtmaaSink.add(value));
+      // await _detailsUseCase.getCollection(collectionId: collectionId, documentId: documentId, documentType: DocumentType.TASBEHA).then((value) => tasbehaSink.add(value));
+      // await _detailsUseCase.getCollection(collectionId: collectionId, documentId: documentId, documentType: DocumentType.ODAS).then((value) => odasSink.add(value));
     });
   }
 
   @override
   Future getAttendanceForAllStudents({required String collectionId}) async {
-    // TODO: implement getAttendance
     await runSafe(() async {
       for (int i = 0; i < names.length; i++) {
-        await _detailsUseCase.getCollection(collectionId: collectionId, documentId: names[i], documentType: DocumentType.EGTMAA).then((value) {
-          egtmaa.add(value.length);
-        });
-        await _detailsUseCase.getCollection(collectionId: collectionId, documentId: names[i], documentType: DocumentType.TASBEHA).then((value) {
-          tasbeha.add(value.length);
-        });
-        await _detailsUseCase.getCollection(collectionId: collectionId, documentId: names[i], documentType: DocumentType.ODAS).then((value) {
-          odas.add(value.length);
-        });
-
-        map.add({
-          'name': names[i],
-          'egtmaa': egtmaa[i],
-          'odas': odas[i],
-          'tasbeha': tasbeha[i],
-        });
+        attendanceFutures.add(getStudentAttendance(collectionId: collectionId, name: names[i]));
       }
-      String csv = jsonToCsv(map);
-      await exportCsv(csv, "attendance");
+      await Future.wait(attendanceFutures);
+      String csv = jsonToCsv(toCsvMap);
+      print(csv);
+      await exportCsv(csv, "$collectionId attendance + ${DateTime.now().toString()}");
+      view?.showSuccessMsg('تم رفع البيانات بنجاح');
+    });
+  }
+
+  Future getStudentAttendance({required String collectionId, required String name}) async {
+    await runSafe(() async {
+      int sundayLitrugy = 0;
+      int fridayLitrugy = 0;
+      int eve = 0;
+      int classAttendance = 0;
+      await _detailsUseCase.getCollection(collectionId: collectionId, documentId: name, documentType: DocumentType.sundayLitrugy).then((value) {
+        sundayLitrugy = value.length;
+      });
+      await _detailsUseCase.getCollection(collectionId: collectionId, documentId: name, documentType: DocumentType.fridayLitrugy).then((value) {
+        fridayLitrugy = value.length;
+      });
+      await _detailsUseCase.getCollection(collectionId: collectionId, documentId: name, documentType: DocumentType.eve).then((value) {
+        eve = value.length;
+      });
+
+      await _detailsUseCase.getCollection(collectionId: collectionId, documentId: name, documentType: DocumentType.classAttendance).then((value) {
+        classAttendance = value.length;
+      });
+      toCsvMap.add({
+        'الاسم': name,
+        "حضور الحصة": classAttendance,
+        'حضور قداس الاحد': sundayLitrugy,
+        'حضور القداسات': fridayLitrugy,
+        'حضور العشية': eve,
+      });
+      print(toCsvMap.last);
     });
   }
 
@@ -177,48 +197,42 @@ class DetailsViewModel extends BaseViewModel with DetailsViewModelInputs, Detail
   Stream<List<QueryDocumentSnapshot<Object?>>> get dataStream => _dataStreamController.stream;
 
   @override
-  // TODO: implement egtmaaSink
   Sink get egtmaaSink => _egtmaaStreamController.sink;
 
   @override
-  // TODO: implement egtmaaStream
   Stream<List<QueryDocumentSnapshot<Object?>>> get egtmaaStream => _egtmaaStreamController.stream;
 
   @override
-  // TODO: implement odasSink
   Sink get odasSink => _odasStreamController.sink;
 
   @override
-  // TODO: implement odasStream
   Stream<List<QueryDocumentSnapshot<Object?>>> get odasStream => _odasStreamController.stream;
 
   @override
-  // TODO: implement tasbehaSink
   Sink get tasbehaSink => _tasbehaStreamController.sink;
 
   @override
-  // TODO: implement tasbehaStream
   Stream<List<QueryDocumentSnapshot<Object?>>> get tasbehaStream => _tasbehaStreamController.stream;
 
-  Future setCollection({
-    required DocumentType documentType,
-    required String collectionId,
-    required String documentId,
-  }) async {
-    await runSafe(() async {
-      await _sectionUseCase.setCollection(collectionId: collectionId, documentId: documentId, documentType: documentType);
-    });
-  }
+// Future setCollection({
+//   required DocumentType documentType,
+//   required String collectionId,
+//   required String documentId,
+// }) async {
+//   await runSafe(() async {
+//     await _sectionUseCase.setCollection(collectionId: collectionId, documentId: documentId, documentType: documentType);
+//   });
+// }
 
-  Future removeCollection({
-    required DocumentType documentType,
-    required String collectionId,
-    required String documentId,
-  }) async {
-    await runSafe(() async {
-      await _sectionUseCase.setCollection(collectionId: collectionId, documentId: documentId, documentType: documentType);
-    });
-  }
+// Future removeCollection({
+//   required DocumentType documentType,
+//   required String collectionId,
+//   required String documentId,
+// }) async {
+//   await runSafe(() async {
+//     await _sectionUseCase.setCollection(collectionId: collectionId, documentId: documentId, documentType: documentType);
+//   });
+// }
 }
 
 abstract class DetailsViewModelInputs {

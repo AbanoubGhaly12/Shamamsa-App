@@ -25,14 +25,19 @@ class CustomCheckBox extends StatelessWidget {
       child: Row(
         children: [
           Checkbox(
-            fillColor: MaterialStatePropertyAll(ColorsManager.darkCharcoal),
-            checkColor: ColorsManager.white,
+            fillColor: MaterialStatePropertyAll(ColorsManager.white),
+            checkColor: ColorsManager.darkCharcoal,
+            activeColor: ColorsManager.white,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(5),
+              side: BorderSide(color: ColorsManager.darkCharcoal, width: 2),
+            ),
             value: value,
             onChanged: onChanged,
           ),
           CustomText(
             text: title,
-            style: StyleManager.cairoMediumBold.getStyle(context: context),
+            style: StyleManager.cairoMediumBold.getStyle(context: context).copyWith(fontSize: 24),
           ),
         ],
       ),

@@ -15,23 +15,19 @@ class SectionUseCase extends BaseUseCase<void, List<QueryDocumentSnapshot>> {
     return await _firestoreRepo.getDocs(collectionId: '');
   }
 
-  Future setCollection(
-      {required String collectionId,
-      required String documentId,
-      required DocumentType documentType}) async {
-    await _firestoreRepo.createCollection(
-        collectionId: collectionId,
-        documentId: documentId,
-        documentType: documentType);
+  Future setCollection({required String collectionId, required String documentId, required String documentType}) async {
+    await _firestoreRepo.createCollection(collectionId: collectionId, documentId: documentId, documentType: documentType);
   }
 
-  Future removeCollection(
-      {required String collectionId,
-      required String documentId,
-      required DocumentType documentType}) async {
-    await _firestoreRepo.createCollection(
-        collectionId: collectionId,
-        documentId: documentId,
-        documentType: documentType);
+  Future removeCollection({required String collectionId, required String documentId, required String documentType}) async {
+    await _firestoreRepo.createCollection(collectionId: collectionId, documentId: documentId, documentType: documentType);
+  }
+
+  Future<DocumentSnapshot?> checkExistence({required String collectionId, required String documentId}) async {
+    return await _firestoreRepo.getDocumentData(collectionId: collectionId, name: documentId);
+  }
+
+  Future<List<QueryDocumentSnapshot>> getCollection({required String collectionId, required String documentId, required DocumentType documentType}) async {
+    return await _firestoreRepo.getCollectionsWithType(collectionId: collectionId, documentId: documentId, typeId: documentType.value);
   }
 }

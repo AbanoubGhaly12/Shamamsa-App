@@ -257,6 +257,10 @@ class TextManager {
   static const String estifanos = "estifanos";
   static const String score = "score";
   static const String question = "question";
+  static const String firstStage = "first_stage";
+  static const String secondStage = "second_stage";
+  static const String thirdStage = "third_stage";
+  static const String fourthStage = "fourth_stage";
 
 
 

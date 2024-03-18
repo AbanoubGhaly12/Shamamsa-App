@@ -43,11 +43,22 @@ class _ScanScreenState extends BaseState<ScanScreen, SectionViewModel> {
         centerTitle: true,
         title: CustomText(
           text: TextManager.title.tr(),
-          style:
-          StyleManager.cairoMediumBold.getStyle(context: context).copyWith(
-            color: ColorsManager.white,
+          style: StyleManager.cairoMediumBold.getStyle(context: context).copyWith(
+                color: ColorsManager.white,
+              ),
+        ),
+        actions: [
+          IconButton(
+            onPressed: () async {
+              controller!.resumeCamera();
+              setState(() {
+                result = null;
+              });
+            },
+            icon: const Icon(Icons.refresh),
           ),
-        ),      ),
+        ],
+      ),
       body: Center(
         child: Stack(
           children: [
@@ -62,18 +73,14 @@ class _ScanScreenState extends BaseState<ScanScreen, SectionViewModel> {
                     onPressed: result == null
                         ? null
                         : () {
-                            viewModel.navigation.pushReplacementNamed(
-                                route: Routes.sectionRoute,
-                                arguments: [
-                                  widget.collectionReferenceId,
-                                  result!.code
-                                ]);
+                            controller!.pauseCamera();
+
+                            viewModel.navigation.pushNamed(route: Routes.sectionRoute, arguments: [widget.collectionReferenceId, result!.code]);
                           },
                     text: "اذهب الي صفحة التسجيل",
                     buttonColor: ColorsManager.metallicOrange,
                     width: SizeManager.s150,
-                    textStyle:
-                        StyleManager.cairoMediumBold.getStyle(context: context),
+                    textStyle: StyleManager.cairoMediumBold.getStyle(context: context),
                   ),
                 ),
               ),
@@ -97,21 +104,13 @@ class _ScanScreenState extends BaseState<ScanScreen, SectionViewModel> {
 
   Widget _buildQrView(BuildContext context) {
     // For this example we check how width or tall the device is and change the scanArea and overlay accordingly.
-    var scanArea = (MediaQuery.of(context).size.width < 400 ||
-            MediaQuery.of(context).size.height < 400)
-        ? 200.0
-        : 300.0;
+    var scanArea = (MediaQuery.of(context).size.width < 400 || MediaQuery.of(context).size.height < 400) ? 200.0 : 300.0;
     // To ensure the Scanner view is properly sizes after rotation
     // we need to listen for Flutter SizeChanged notification and update controller
     return QRView(
       key: qrKey,
       onQRViewCreated: _onQRViewCreated,
-      overlay: QrScannerOverlayShape(
-          borderColor: Colors.red,
-          borderRadius: 10,
-          borderLength: 30,
-          borderWidth: 10,
-          cutOutSize: scanArea),
+      overlay: QrScannerOverlayShape(borderColor: Colors.red, borderRadius: 10, borderLength: 30, borderWidth: 10, cutOutSize: scanArea),
       onPermissionSet: (ctrl, p) => _onPermissionSet(context, ctrl, p),
     );
   }
@@ -124,7 +123,6 @@ class _ScanScreenState extends BaseState<ScanScreen, SectionViewModel> {
       setState(() {
         result = scanData;
       });
-
     });
   }
 

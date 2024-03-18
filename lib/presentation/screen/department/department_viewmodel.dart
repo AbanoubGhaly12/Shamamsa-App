@@ -17,32 +17,12 @@ class DepartmentViewModel extends BaseViewModel
   //
   // DepartmentViewModel(this._departmentUseCase);
 
-  List<Map<String, String>> items = [
-    {
-      "name": TextManager.saintAbanoub.tr(),
-      "image": ImageAssetsManager.abanoub
-    },
-    {
-      "name": TextManager.deskoros.tr(),
-      "image": ImageAssetsManager.deskoros
-    },
-    {
-      "name": TextManager.sedhomBeshay.tr(),
-      "image": ImageAssetsManager.SidhomBishay
-    },
-    {
-      "name": TextManager.esklabios.tr(),
-      "image": ImageAssetsManager.deskoros
-    },
-    {
-      "name": TextManager.papaKerolos.tr(),
-      "image": ImageAssetsManager.papaKerolos
-    },
-    {"name": TextManager.ebram.tr(), "image": ImageAssetsManager.ebram},
-    {
-      "name": TextManager.estifanos.tr(),
-      "image": ImageAssetsManager.estefanos
-    },
+  List< String> items = [
+
+     TextManager.firstStage.tr(),
+     TextManager.secondStage.tr(),
+     TextManager.thirdStage.tr(),
+     TextManager.fourthStage.tr(),
   ];
 
   List<String> collectionReference = [

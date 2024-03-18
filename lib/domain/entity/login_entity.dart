@@ -11,4 +11,6 @@ class LoginEntity extends Equatable {
 
   @override
   List<Object?> get props => [email, password];
+
+  bool get isValid => email != null && password != null;
 }

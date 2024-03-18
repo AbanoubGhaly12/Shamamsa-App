@@ -1,0 +1,29 @@
+import '${VIEWMODELFILENAME}.dart';
+import 'package:flutter/material.dart';
+import '../../base/base_state.dart';
+
+class ${SCREENNAME} extends StatefulWidget {
+  const ${SCREENNAME}({super.key});
+
+  @override
+  State<${SCREENNAME}> createState() => _${SCREENNAME}State();
+}
+
+class _${SCREENNAME}State extends BaseState<${SCREENNAME}, ${VIEWMODELNAME}> {
+
+  @override
+  Widget buildWidget(BuildContext context) {
+    return Container();
+  }
+
+  @override
+  String getScreenName() {
+    return "${SCREENNAME}";
+  }
+
+  @override
+  initScreen() {}
+
+  @override
+  void onDispose() {}
+}

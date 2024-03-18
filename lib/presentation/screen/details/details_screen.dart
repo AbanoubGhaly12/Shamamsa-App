@@ -35,7 +35,7 @@ class _DetailsScreenState extends BaseState<DetailsScreen, DetailsViewModel> {
             onPressed: () async {
              widget.isAttendanceScreen? await viewModel.getAttendanceForAllStudents(collectionId: widget.collectionReferenceId):await viewModel.getExamScoreCsv(collectionId: "نتيجة اسرة البابا كيرلس");
             },
-            icon: const Icon(Icons.table_view_sharp),
+            icon: const Icon(Icons.table_view_sharp,color: Colors.white,),
           ),
         ],
         title: CustomText(
@@ -57,49 +57,52 @@ class _DetailsScreenState extends BaseState<DetailsScreen, DetailsViewModel> {
                     color: ColorsManager.darkCharcoal,
                     child: ListTile(
                       onTap: () async {
-                        if (widget.isAttendanceScreen) {
-                          viewModel.getAttendance(collectionId: widget.collectionReferenceId, documentId: namesSnapshot.data![index].id).then((value) => showModalBottomSheet(
-                                context: context,
-                                builder: (context) => ClipRRect(
-                                  borderRadius: const BorderRadius.only(topLeft: Radius.circular(SizeManager.s20), topRight: Radius.circular(SizeManager.s20)),
-                                  child: Container(
-                                    height: SizeManager.s200,
-                                    color: ColorsManager.metallicOrange,
-                                    child: CustomBottomSheet(
-                                      egtmaaStream: viewModel.egtmaaStream,
-                                      tasbehaStream: viewModel.tasbehaStream,
-                                      odasStream: viewModel.odasStream,
-                                      onPressed1: (bool flag) async {
-                                        if (flag) {
-                                          viewModel
-                                              .setCollection(documentType: DocumentType.EGTMAA, collectionId: widget.collectionReferenceId, documentId: namesSnapshot.data![index].id)
-                                              .then((value) => viewModel.getAttendance(collectionId: widget.collectionReferenceId, documentId: namesSnapshot.data![index].id));
-                                        }
-                                      },
-                                      onPressed2: (bool flag) {
-                                        if (flag) {
-                                          viewModel
-                                              .setCollection(documentType: DocumentType.TASBEHA, collectionId: widget.collectionReferenceId, documentId: namesSnapshot.data![index].id)
-                                              .then((value) => viewModel.getAttendance(collectionId: widget.collectionReferenceId, documentId: namesSnapshot.data![index].id));
-                                        }
-                                      },
-                                      onPressed3: (bool flag) {
-                                        if (flag) {
-                                          viewModel
-                                              .setCollection(documentType: DocumentType.ODAS, collectionId: widget.collectionReferenceId, documentId: namesSnapshot.data![index].id)
-                                              .then((value) => viewModel.getAttendance(collectionId: widget.collectionReferenceId, documentId: namesSnapshot.data![index].id));
-                                        }
-                                      },
-                                    ),
-                                  ),
-                                ),
-                                backgroundColor: Colors.transparent,
-                              ));
-                        } else {
-                          viewModel.navigation.pushNamed(
-                              route: Routes.examFormRoute,
-                              arguments: ExamFormModel(collectionReferenceId: "نتيجة اسرة البابا كيرلس", examCollectionId: "امتحان الحان اسرة البابا كيرلس", docId: namesSnapshot.data![index].id));
-                        }
+                        viewModel.navigation.pushNamed(route: Routes.sectionRoute, arguments: [widget.collectionReferenceId, namesSnapshot.data![index].id]);
+
+                        // if (widget.isAttendanceScreen) {
+                        //   viewModel.getAttendance(collectionId: widget.collectionReferenceId, documentId: namesSnapshot.data![index].id).then((value) => showModalBottomSheet(
+                        //         context: context,
+                        //         builder: (context) => ClipRRect(
+                        //           borderRadius: const BorderRadius.only(topLeft: Radius.circular(SizeManager.s20), topRight: Radius.circular(SizeManager.s20)),
+                        //           child: Container(
+                        //             height: SizeManager.s200,
+                        //             color: ColorsManager.metallicOrange,
+                        //             child: CustomBottomSheet(
+                        //               egtmaaStream: viewModel.egtmaaStream,
+                        //               tasbehaStream: viewModel.tasbehaStream,
+                        //               odasStream: viewModel.odasStream,
+                        //               onPressed1: (bool flag) async {
+                        //                 // if (flag) {
+                        //                 //   viewModel
+                        //                 //       .setCollection(documentType: DocumentType.EGTMAA, collectionId: widget.collectionReferenceId, documentId: namesSnapshot.data![index].id)
+                        //                 //       .then((value) => viewModel.getAttendance(collectionId: widget.collectionReferenceId, documentId: namesSnapshot.data![index].id));
+                        //                 // }
+                        //               },
+                        //               onPressed2: (bool flag) {
+                        //                 // if (flag) {
+                        //                 //   viewModel
+                        //                 //       .setCollection(documentType: DocumentType.TASBEHA, collectionId: widget.collectionReferenceId, documentId: namesSnapshot.data![index].id)
+                        //                 //       .then((value) => viewModel.getAttendance(collectionId: widget.collectionReferenceId, documentId: namesSnapshot.data![index].id));
+                        //                 // }
+                        //               },
+                        //               onPressed3: (bool flag) {
+                        //                 // if (flag) {
+                        //                 //   viewModel
+                        //                 //       .setCollection(documentType: DocumentType.ODAS, collectionId: widget.collectionReferenceId, documentId: namesSnapshot.data![index].id)
+                        //                 //       .then((value) => viewModel.getAttendance(collectionId: widget.collectionReferenceId, documentId: namesSnapshot.data![index].id));
+                        //                 // }
+                        //               },
+                        //             ),
+                        //           ),
+                        //         ),
+                        //         backgroundColor: Colors.transparent,
+                        //       ));
+                        // } else {
+                        //   viewModel.navigation.pushNamed(
+                        //       route: Routes.examFormRoute,
+                        //       arguments: ExamFormModel(collectionReferenceId: "نتيجة اسرة البابا كيرلس", examCollectionId: "امتحان الحان اسرة البابا كيرلس", docId: namesSnapshot.data![index].id));
+                        // }
+
                       },
                       leading: FittedBox(
                         fit: BoxFit.scaleDown,

@@ -1,0 +1,12 @@
+import '../../base/base_viewmodel.dart';
+
+class ${VIEWMODELNAME} extends BaseViewModel with ${VIEWMODELNAME}Inputs, ${VIEWMODELNAME}Outputs{
+  @override
+  void onDispose() {
+  }
+}
+
+abstract class ${VIEWMODELNAME}Inputs {}
+
+
+abstract class ${VIEWMODELNAME}Outputs {}

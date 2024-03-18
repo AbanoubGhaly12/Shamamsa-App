@@ -20,140 +20,141 @@ class CustomBottomSheet extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child: Column(
-        children: [
-          StreamBuilder<List<QueryDocumentSnapshot>>(
-              stream: egtmaaStream,
-              builder: (context, snapshot) {
-                if (snapshot.data != null) {
-                  return Row(
-                    children: [
-                      IconButton(
-                          icon: Icon(
-                            Icons.add_circle,
-                            size: SizeManager.s30,
-                            color: ColorsManager.white,
-                          ),
-                          onPressed: () => onPressed1(true)),
-                      IconButton(
-                          icon: Icon(
-                            size: SizeManager.s30,
-                            Icons.remove_circle,
-                            color: ColorsManager.black,
-                          ),
-                          onPressed: () => onPressed1(false)),
-                      Expanded(
-                        child: ListTile(
-                          title: FittedBox(
-                            fit: BoxFit.scaleDown,
-                            child: CustomText(
-                              text: DocumentType.EGTMAA.value,
-                              style: StyleManager.cairoMediumBold.getStyle(context: context).copyWith(color: ColorsManager.white),
-                            ),
-                          ),
-                          trailing: FittedBox(
-                            fit: BoxFit.scaleDown,
-                            child: CustomText(
-                              text: "عدد مرات الحضور   ${snapshot.data!.length.toString()}",
-                              style: StyleManager.cairoMediumBold.getStyle(context: context).copyWith(color: ColorsManager.white),
-                            ),
-                          ),
-                        ),
-                      ),
-                    ],
-                  );
-                }
-                return Container();
-              }),
-          StreamBuilder<List<QueryDocumentSnapshot>>(
-              stream: tasbehaStream,
-              builder: (context, snapshot) {
-                if (snapshot.data != null) {
-                  return Row(
-                    children: [
-                      IconButton(
-                          icon: Icon(
-                            Icons.add_circle,
-                            size: SizeManager.s30,
-                            color: ColorsManager.white,
-                          ),
-                          onPressed: () => onPressed2(true)),
-                      IconButton(
-                          icon: Icon(
-                            size: SizeManager.s30,
-                            Icons.remove_circle,
-                            color: ColorsManager.black,
-                          ),
-                          onPressed: () => onPressed2(false)),
-                      Expanded(
-                        child: ListTile(
-                          title: FittedBox(
-                            fit: BoxFit.scaleDown,
-                            child: CustomText(
-                              text: DocumentType.TASBEHA.value,
-                              style: StyleManager.cairoMediumBold.getStyle(context: context).copyWith(color: ColorsManager.white),
-                            ),
-                          ),
-                          trailing: FittedBox(
-                            fit: BoxFit.scaleDown,
-                            child: CustomText(
-                              text: "عدد مرات الحضور   ${snapshot.data!.length.toString()}",
-                              style: StyleManager.cairoMediumBold.getStyle(context: context).copyWith(color: ColorsManager.white),
-                            ),
-                          ),
-                        ),
-                      ),
-                    ],
-                  );
-                }
-                return Container();
-              }),
-          StreamBuilder<List<QueryDocumentSnapshot>>(
-              stream: odasStream,
-              builder: (context, snapshot) {
-                if (snapshot.data != null) {
-                  return Row(
-                    children: [
-                      IconButton(
-                          icon: Icon(
-                            Icons.add_circle,
-                            size: SizeManager.s30,
-                            color: ColorsManager.white,
-                          ),
-                          onPressed: () => onPressed3(true)),
-                      IconButton(
-                          icon: Icon(
-                            size: SizeManager.s30,
-                            Icons.remove_circle,
-                            color: ColorsManager.black,
-                          ),
-                          onPressed: () => onPressed3(false)),
-                      Expanded(
-                        child: ListTile(
-                          title: FittedBox(
-                            fit: BoxFit.scaleDown,
-                            child: CustomText(
-                              text: DocumentType.ODAS.value,
-                              style: StyleManager.cairoMediumBold.getStyle(context: context).copyWith(color: ColorsManager.white),
-                            ),
-                          ),
-                          trailing: FittedBox(
-                            fit: BoxFit.scaleDown,
-                            child: CustomText(
-                              text: "عدد مرات الحضور   ${snapshot.data!.length.toString()}",
-                              style: StyleManager.cairoMediumBold.getStyle(context: context).copyWith(color: ColorsManager.white),
-                            ),
-                          ),
-                        ),
-                      ),
-                    ],
-                  );
-                }
-                return Container();
-              }),
-        ],
-      ),
-    );
+    return Container();
+    // return SingleChildScrollView(
+    //   child: Column(
+    //     children: [
+    //       StreamBuilder<List<QueryDocumentSnapshot>>(
+    //           stream: egtmaaStream,
+    //           builder: (context, snapshot) {
+    //             if (snapshot.data != null) {
+    //               return Row(
+    //                 children: [
+    //                   IconButton(
+    //                       icon: Icon(
+    //                         Icons.add_circle,
+    //                         size: SizeManager.s30,
+    //                         color: ColorsManager.white,
+    //                       ),
+    //                       onPressed: () => onPressed1(true)),
+    //                   IconButton(
+    //                       icon: Icon(
+    //                         size: SizeManager.s30,
+    //                         Icons.remove_circle,
+    //                         color: ColorsManager.black,
+    //                       ),
+    //                       onPressed: () => onPressed1(false)),
+    //                   Expanded(
+    //                     child: ListTile(
+    //                       title: FittedBox(
+    //                         fit: BoxFit.scaleDown,
+    //                         child: CustomText(
+    //                           text: DocumentType.EGTMAA.value,
+    //                           style: StyleManager.cairoMediumBold.getStyle(context: context).copyWith(color: ColorsManager.white),
+    //                         ),
+    //                       ),
+    //                       trailing: FittedBox(
+    //                         fit: BoxFit.scaleDown,
+    //                         child: CustomText(
+    //                           text: "عدد مرات الحضور   ${snapshot.data!.length.toString()}",
+    //                           style: StyleManager.cairoMediumBold.getStyle(context: context).copyWith(color: ColorsManager.white),
+    //                         ),
+    //                       ),
+    //                     ),
+    //                   ),
+    //                 ],
+    //               );
+    //             }
+    //             return Container();
+    //           }),
+    //       StreamBuilder<List<QueryDocumentSnapshot>>(
+    //           stream: tasbehaStream,
+    //           builder: (context, snapshot) {
+    //             if (snapshot.data != null) {
+    //               return Row(
+    //                 children: [
+    //                   IconButton(
+    //                       icon: Icon(
+    //                         Icons.add_circle,
+    //                         size: SizeManager.s30,
+    //                         color: ColorsManager.white,
+    //                       ),
+    //                       onPressed: () => onPressed2(true)),
+    //                   IconButton(
+    //                       icon: Icon(
+    //                         size: SizeManager.s30,
+    //                         Icons.remove_circle,
+    //                         color: ColorsManager.black,
+    //                       ),
+    //                       onPressed: () => onPressed2(false)),
+    //                   Expanded(
+    //                     child: ListTile(
+    //                       title: FittedBox(
+    //                         fit: BoxFit.scaleDown,
+    //                         child: CustomText(
+    //                           text: DocumentType.TASBEHA.value,
+    //                           style: StyleManager.cairoMediumBold.getStyle(context: context).copyWith(color: ColorsManager.white),
+    //                         ),
+    //                       ),
+    //                       trailing: FittedBox(
+    //                         fit: BoxFit.scaleDown,
+    //                         child: CustomText(
+    //                           text: "عدد مرات الحضور   ${snapshot.data!.length.toString()}",
+    //                           style: StyleManager.cairoMediumBold.getStyle(context: context).copyWith(color: ColorsManager.white),
+    //                         ),
+    //                       ),
+    //                     ),
+    //                   ),
+    //                 ],
+    //               );
+    //             }
+    //             return Container();
+    //           }),
+    //       StreamBuilder<List<QueryDocumentSnapshot>>(
+    //           stream: odasStream,
+    //           builder: (context, snapshot) {
+    //             if (snapshot.data != null) {
+    //               return Row(
+    //                 children: [
+    //                   IconButton(
+    //                       icon: Icon(
+    //                         Icons.add_circle,
+    //                         size: SizeManager.s30,
+    //                         color: ColorsManager.white,
+    //                       ),
+    //                       onPressed: () => onPressed3(true)),
+    //                   IconButton(
+    //                       icon: Icon(
+    //                         size: SizeManager.s30,
+    //                         Icons.remove_circle,
+    //                         color: ColorsManager.black,
+    //                       ),
+    //                       onPressed: () => onPressed3(false)),
+    //                   Expanded(
+    //                     child: ListTile(
+    //                       title: FittedBox(
+    //                         fit: BoxFit.scaleDown,
+    //                         child: CustomText(
+    //                           text: DocumentType.ODAS.value,
+    //                           style: StyleManager.cairoMediumBold.getStyle(context: context).copyWith(color: ColorsManager.white),
+    //                         ),
+    //                       ),
+    //                       trailing: FittedBox(
+    //                         fit: BoxFit.scaleDown,
+    //                         child: CustomText(
+    //                           text: "عدد مرات الحضور   ${snapshot.data!.length.toString()}",
+    //                           style: StyleManager.cairoMediumBold.getStyle(context: context).copyWith(color: ColorsManager.white),
+    //                         ),
+    //                       ),
+    //                     ),
+    //                   ),
+    //                 ],
+    //               );
+    //             }
+    //             return Container();
+    //           }),
+    //     ],
+    //   ),
+    // );
   }
 }

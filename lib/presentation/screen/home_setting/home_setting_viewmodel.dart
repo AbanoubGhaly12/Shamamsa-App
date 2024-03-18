@@ -25,6 +25,7 @@ class HomeSettingViewModel extends BaseViewModel with HomeSettingViewModelInputs
     await runSafe(() async {
       await _HomeSettingUseCase.setDocuments(collectionId: collectionId, documentId: documentId);
     });
+
   }
 }
 
